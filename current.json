@@ -3,7 +3,7 @@
   "description" : "This is the latest version of Rackie, I fixed a few things which can be found here",
   "patchNotesLink" : "https://www.github.com/masonamcc/rackie-manifest/main/README.md",
   "docker": {
-    "frontendVersion":"1.0.013",
+    "frontendVersion":"1.0.014",
     "backendVersion":"1.0.0"
   }
 }
