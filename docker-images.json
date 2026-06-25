@@ -8,14 +8,14 @@
   },
   {
     "containerName" : "prowlarr",
-    "icon":"https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/prowlarr.png",
+    "iconUrl":"https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/prowlarr.png",
     "category" : "Media",
     "imageName" : "lscr.io/linuxserver/prowlarr:latest",
     "service" : " prowlarr:\n    image: lscr.io/linuxserver/prowlarr:latest\n    container_name: prowlarr\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - ./config/prowlarr:/config\n    ports:\n      - \"9696:9696\"\n    restart: unless-stopped"
   },
   {
     "containerName" : "qbittorrent",
-    "icon":"https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/qbittorrent.png",
+    "iconUrl":"https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/qbittorrent.png",
     "category" : "Torrent",
     "imageName" : "lscr.io/linuxserver/qbittorrent:latest",
     "service" : "qbittorrent:\n        image: lscr.io/linuxserver/qbittorrent:latest\n        container_name: qbittorrent\n        environment:\n          - PUID=1000\n          - PGID=1000\n          - TZ=America/New_York\n          - WEBUI_PORT=8080\n        volumes:\n          - ./config/qbittorrent:/config\n          - ./downloads:/downloads\n        ports:\n          - \"8080:8080\"\n          - \"6881:6881\"\n          - \"6881:6881/udp\"\n        restart: unless-stopped"
