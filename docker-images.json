@@ -1,44 +1,58 @@
 [
+  [
   {
-    "containerName" : "jellyfin",
-    "iconUrl":"https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/jellyfin.png",
-    "category" : "Media",
-    "imageName" : "lscr.io/linuxserver/jellyfin:latest",
-    "service" : "jellyfin:\n    image: lscr.io/linuxserver/jellyfin:latest\n    container_name: jellyfin\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - ./config/jellyfin:/config\n      - ./media/movies:/data/movies\n      - ./media/tv:/data/tv\n    ports:\n      - \"8096:8096\"\n    restart: unless-stopped"
+    "containerName": "jellyfin",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/jellyfin.png",
+    "category": "Media",
+    "imageName": "lscr.io/linuxserver/jellyfin:latest",
+    "excerpt": "Stream your movies, TV shows, and music from your own server.",
+    "description": "Jellyfin is a free and open-source media server that organizes and streams your personal media library to virtually any device. It supports movies, TV shows, music, live TV, DVR, and user accounts without requiring a subscription.",
+    "service": "jellyfin:\n    image: lscr.io/linuxserver/jellyfin:latest\n    container_name: jellyfin\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - ./config/jellyfin:/config\n      - ./media/movies:/data/movies\n      - ./media/tv:/data/tv\n    ports:\n      - \"8096:8096\"\n    restart: unless-stopped"
   },
   {
-    "containerName" : "prowlarr",
-    "iconUrl":"https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/prowlarr.png",
-    "category" : "Media",
-    "imageName" : "lscr.io/linuxserver/prowlarr:latest",
-    "service" : " prowlarr:\n    image: lscr.io/linuxserver/prowlarr:latest\n    container_name: prowlarr\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - ./config/prowlarr:/config\n    ports:\n      - \"9696:9696\"\n    restart: unless-stopped"
+    "containerName": "prowlarr",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/prowlarr.png",
+    "category": "Media",
+    "imageName": "lscr.io/linuxserver/prowlarr:latest",
+    "excerpt": "Manage all your indexers from one place.",
+    "description": "Prowlarr centralizes indexer management for applications like Sonarr, Radarr, Lidarr, and Readarr. Configure your indexers once and automatically sync them across your media automation stack.",
+    "service": " prowlarr:\n    image: lscr.io/linuxserver/prowlarr:latest\n    container_name: prowlarr\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - ./config/prowlarr:/config\n    ports:\n      - \"9696:9696\"\n    restart: unless-stopped"
   },
   {
-    "containerName" : "qbittorrent",
-    "iconUrl":"https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/qbittorrent.png",
-    "category" : "Torrent",
-    "imageName" : "lscr.io/linuxserver/qbittorrent:latest",
-    "service" : "qbittorrent:\n        image: lscr.io/linuxserver/qbittorrent:latest\n        container_name: qbittorrent\n        environment:\n          - PUID=1000\n          - PGID=1000\n          - TZ=America/New_York\n          - WEBUI_PORT=8080\n        volumes:\n          - ./config/qbittorrent:/config\n          - ./downloads:/downloads\n        ports:\n          - \"8080:8080\"\n          - \"6881:6881\"\n          - \"6881:6881/udp\"\n        restart: unless-stopped"
+    "containerName": "qbittorrent",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/qbittorrent.png",
+    "category": "Torrent",
+    "imageName": "lscr.io/linuxserver/qbittorrent:latest",
+    "excerpt": "A lightweight BitTorrent client with a powerful web interface.",
+    "description": "qBittorrent is an open-source BitTorrent client that provides fast downloads, RSS support, search plugins, bandwidth scheduling, and a modern web UI for managing torrents from anywhere.",
+    "service": "qbittorrent:\n        image: lscr.io/linuxserver/qbittorrent:latest\n        container_name: qbittorrent\n        environment:\n          - PUID=1000\n          - PGID=1000\n          - TZ=America/New_York\n          - WEBUI_PORT=8080\n        volumes:\n          - ./config/qbittorrent:/config\n          - ./downloads:/downloads\n        ports:\n          - \"8080:8080\"\n          - \"6881:6881\"\n          - \"6881:6881/udp\"\n        restart: unless-stopped"
   },
   {
-    "containerName":"glances",
-    "iconUrl":"https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/glances.png",
-    "category":"System",
-    "imageName":"nicolargo/glances:latest",
-    "service":"glances:\n    image: nicolargo/glances:latest\n    container_name: glances\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - ./config/glances:/config\n    ports:\n      - \"61208:61208\"\n    restart: unless-stopped"
+    "containerName": "glances",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/glances.png",
+    "category": "System",
+    "imageName": "nicolargo/glances:latest",
+    "excerpt": "Monitor your system's performance in real time.",
+    "description": "Glances is a cross-platform system monitoring tool that displays CPU, memory, disk, network, process, and container statistics through an intuitive web interface or terminal dashboard.",
+    "service": "glances:\n    image: nicolargo/glances:latest\n    container_name: glances\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - ./config/glances:/config\n    ports:\n      - \"61208:61208\"\n    restart: unless-stopped"
   },
   {
-    "containerName":"uptime-kuma",
-    "iconUrl":"https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/uptime-kuma.png",
-    "category":"Metrics",
-    "imageName":"louislam/uptime-kuma:latest",
-    "service":"uptime-kuma:\n  image: louislam/uptime-kuma:1\n  container_name: uptime-kuma\n  restart: unless-stopped\n  ports:\n    - \"3001:3001\"\n  volumes:\n    - ./data:/app/data"
+    "containerName": "uptime-kuma",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/uptime-kuma.png",
+    "category": "Metrics",
+    "imageName": "louislam/uptime-kuma:latest",
+    "excerpt": "Monitor your services and get notified when they go offline.",
+    "description": "Uptime Kuma is a self-hosted uptime monitoring solution that checks the availability of websites, APIs, servers, and services. It includes status pages, notifications, and response time tracking.",
+    "service": "uptime-kuma:\n  image: louislam/uptime-kuma:1\n  container_name: uptime-kuma\n  restart: unless-stopped\n  ports:\n    - \"3001:3001\"\n  volumes:\n    - ./data:/app/data"
   },
   {
     "containerName": "minecraft",
     "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/minecraft.png",
     "category": "Games",
     "imageName": "itzg/minecraft-server:latest",
+    "excerpt": "Host your own Minecraft server in minutes.",
+    "description": "The itzg Minecraft Server container makes it easy to run a customizable Minecraft server with support for Vanilla, Paper, Spigot, Fabric, Forge, and more. Configure server settings through environment variables and persistent storage.",
     "service": "minecraft:\n  image: itzg/minecraft-server:latest\n  container_name: minecraft\n  ports:\n    - \"25565:25565\"\n  environment:\n    EULA: \"TRUE\"\n    TYPE: \"PAPER\"\n    VERSION: \"26.2\"\n    MEMORY: \"6G\"\n    MOTD: \"Mason's HomeLab Minecraft Server\"\n    ENABLE_ROLLING_LOGS: \"true\"\n  volumes:\n    - ./data:/data\n  restart: unless-stopped"
   }
+]
 ]
