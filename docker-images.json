@@ -4,7 +4,7 @@
     "containerName": "jellyfin",
     "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/jellyfin.png",
     "category": "Media",
-    "helpLink":"https://jellyfin.org/docs/general/getting-help/"
+    "helpLink":"https://jellyfin.org/docs/general/getting-help/",
     "imageName": "lscr.io/linuxserver/jellyfin:latest",
     "excerpt": "Stream your movies, TV shows, and music from your own server.",
     "description": "Jellyfin is a free and open-source media server that organizes and streams your personal media library to virtually any device. It supports movies, TV shows, music, live TV, DVR, and user accounts without requiring a subscription.",
