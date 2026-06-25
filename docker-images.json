@@ -26,6 +26,19 @@
     "category":"System",
     "imageName":"nicolargo/glances:latest",
     "service":"glances:\n    image: nicolargo/glances:latest\n    container_name: glances\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - ./config/glances:/config\n    ports:\n      - \"61208:61208\"\n    restart: unless-stopped"
+  },
+  {
+    "containerName":"uptime-kuma",
+    "iconUrl":"https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/uptime-kuma.png",
+    "category":"Metrics",
+    "imageName":"louislam/uptime-kuma:latest",
+    "service":"uptime-kuma:\n  image: louislam/uptime-kuma:1\n  container_name: uptime-kuma\n  restart: unless-stopped\n  ports:\n    - \"3001:3001\"\n  volumes:\n    - ./data:/app/data"
+  },
+  {
+    "containerName": "minecraft",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/minecraft.png",
+    "category": "Games",
+    "imageName": "itzg/minecraft-server:latest",
+    "service": "minecraft:\n  image: itzg/minecraft-server:latest\n  container_name: minecraft\n  ports:\n    - \"25565:25565\"\n  environment:\n    EULA: \"TRUE\"\n    TYPE: \"PAPER\"\n    VERSION: \"26.2\"\n    MEMORY: \"6G\"\n    MOTD: \"Mason's HomeLab Minecraft Server\"\n    ENABLE_ROLLING_LOGS: \"true\"\n  volumes:\n    - ./data:/data\n  restart: unless-stopped"
   }
-
 ]
