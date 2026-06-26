@@ -53,7 +53,7 @@
     "imageName": "louislam/uptime-kuma:latest",
     "excerpt": "Monitor your services and get notified when they go offline.",
     "description": "Uptime Kuma is a self-hosted uptime monitoring solution that checks the availability of websites, APIs, servers, and services. It includes status pages, notifications, and response time tracking.",
-    "service": "  uptime-kuma:\n  image: louislam/uptime-kuma:1\n  container_name: uptime-kuma\n  restart: unless-stopped\n  ports:\n    - \"3001:3001\"\n  volumes:\n    - ./data:/app/data"
+    "service": "  uptime-kuma:\n    image: louislam/uptime-kuma:1\n    container_name: uptime-kuma\n    restart: unless-stopped\n    ports:\n      - \"3001:3001\"\n  volumes:\n      - ./data:/app/data"
   },
   {
     "containerName": "minecraft",
@@ -64,7 +64,7 @@
     "imageName": "itzg/minecraft-server:latest",
     "excerpt": "Host your own Minecraft server in minutes.",
     "description": "The itzg Minecraft Server container makes it easy to run a customizable Minecraft server with support for Vanilla, Paper, Spigot, Fabric, Forge, and more. Configure server settings through environment variables and persistent storage.",
-    "service": "  minecraft:\n  image: itzg/minecraft-server:latest\n  container_name: minecraft\n  ports:\n    - \"25565:25565\"\n  environment:\n    EULA: \"TRUE\"\n    TYPE: \"PAPER\"\n    VERSION: \"26.2\"\n    MEMORY: \"6G\"\n    MOTD: \"Mason's HomeLab Minecraft Server\"\n    ENABLE_ROLLING_LOGS: \"true\"\n  volumes:\n    - ./data:/data\n  restart: unless-stopped"
+    "service": "  minecraft:\n    image: itzg/minecraft-server:latest\n    container_name: minecraft\n    ports:\n    - \"25565:25565\"\n    environment:\n    EULA: \"TRUE\"\n    TYPE: \"PAPER\"\n    VERSION: \"26.2\"\n    MEMORY: \"6G\"\n    MOTD: \"Mason's HomeLab Minecraft Server\"\n    ENABLE_ROLLING_LOGS: \"true\"\n  volumes:\n    - ./data:/data\n  restart: unless-stopped"
   }
 
 ]
