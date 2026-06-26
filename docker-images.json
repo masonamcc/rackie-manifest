@@ -42,7 +42,7 @@
     "imageName": "nicolargo/glances:latest",
     "excerpt": "Monitor your system's performance in real time.",
     "description": "Glances is a cross-platform system monitoring tool that displays CPU, memory, disk, network, process, and container statistics through an intuitive web interface or terminal dashboard.",
-    "service": "  glances:\n    image: nicolargo/glances:latest\n    container_name: glances\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - ./config/glances:/config\n    ports:\n      - \"61208:61208\"\n    restart: unless-stopped"
+    "service": "glances:\n    image: nicolargo/glances:latest\n    container_name: glances\n    restart: unless-stopped\n    pid: host\n    network_mode: host\n    environment:\n      - GLANCES_OPT=-w\n      - TZ=America/New_York\n    volumes:\n      - /var/run/docker.sock:/var/run/docker.sock:ro"
   },
   {
     "containerName": "uptime-kuma",
