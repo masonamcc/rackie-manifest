@@ -53,7 +53,7 @@
     "imageName": "louislam/uptime-kuma:latest",
     "excerpt": "Monitor your services and get notified when they go offline.",
     "description": "Uptime Kuma is a self-hosted uptime monitoring solution that checks the availability of websites, APIs, servers, and services. It includes status pages, notifications, and response time tracking.",
-    "service": "uptime-kuma:\n    image: louislam/uptime-kuma:1\n    container_name: uptime-kuma\n    restart: unless-stopped\n    ports:\n      - \"3001:3001\"\n  volumes:\n      - ./data:/app/data"
+    "service": "uptime-kuma:\n    image: louislam/uptime-kuma:1\n    container_name: uptime-kuma\n    restart: unless-stopped\n    ports:\n      - \"3001:3001\"\n    volumes:\n      - ./data:/app/data"
   },
   {
     "containerName": "minecraft",
