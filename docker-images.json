@@ -23,6 +23,17 @@
     "service": "prowlarr:\n    image: lscr.io/linuxserver/prowlarr:latest\n    container_name: prowlarr\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - ./config/prowlarr:/config\n    ports:\n      - \"9696:9696\"\n    restart: unless-stopped"
   },
   {
+  "containerName": "qui",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/qui-dark.png",
+  "category": "Utilities",
+  "port": "7476",
+  "helpLink": "https://getqui.com/",
+  "imageName": "ghcr.io/autobrr/qui:latest",
+  "excerpt": "A lightweight web interface for managing and viewing files.",
+  "description": "Qui is a lightweight web application from the autobrr project that provides a simple interface for browsing and managing files through your browser.",
+  "service": "qui:\n    image: ghcr.io/autobrr/qui:latest\n    container_name: qui\n    restart: unless-stopped\n    ports:\n      - \"7476:7476\"\n    volumes:\n      - ./config:/config"
+  },
+  {
     "containerName": "qbittorrent",
     "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/qbittorrent.png",
     "category": "Torrent",
