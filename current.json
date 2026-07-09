@@ -1,9 +1,8 @@
 {
   "name" : "Rackie",
-  "description" : "This is the latest version of Rackie, I fixed a few things which can be found here",
-  "patchNotesLink" : "https://www.github.com/masonamcc/rackie-manifest/main/README.md",
+  "description" : "",
   "docker": {
-    "frontendVersion":"1.0.017",
+    "frontendVersion":"2.0.0",
     "backendVersion":"1.0.0"
   }
 }
