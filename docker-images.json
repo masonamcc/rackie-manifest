@@ -157,7 +157,7 @@
     "helpLink":"https://help.minecraft.net/hc/en-us",
     "imageName": "itzg/minecraft-server:latest",
     "excerpt": "Host your own Minecraft server in minutes.",
-    "description": "The itzg Minecraft Server container makes it easy to run a customizable Minecraft server with support for Vanilla, Paper, Spigot, Fabric, Forge, and more. Configure server settings through environment variables and persistent storage.",
+    "description": "The itzg Minecraft Server container makes it easy to run a customizable Minecraft server with support for Vanilla, Paper, Spigot, Fabric, Forge, and more.",
     "service": {
       "image": "itzg/minecraft-server:latest",
       "container_name": "minecraft",
