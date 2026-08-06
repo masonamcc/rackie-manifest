@@ -2,7 +2,7 @@
   "name" : "Rackie",
   "description" : "",
   "docker": {
-    "frontendVersion":"2.0.0",
+    "frontendVersion":"2.1.0",
     "backendVersion":"1.0.0"
   }
 }
