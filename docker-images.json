@@ -177,5 +177,236 @@
       ],
       "restart": "unless-stopped"
     }
+  },
+  {
+  "containerName": "portainer",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/portainer.png",
+  "category": "Core",
+  "port": "9000",
+  "helpLink": "https://docs.portainer.io/",
+  "imageName": "portainer/portainer-ce:latest",
+  "excerpt": "Manage your Docker containers from an easy-to-use web interface.",
+  "description": "Portainer is a lightweight management interface for Docker that lets you create, manage, monitor, and troubleshoot containers, images, networks, and volumes through a web browser.",
+  "service": {
+    "image": "portainer/portainer-ce:latest",
+    "container_name": "portainer",
+    "volumes": [
+      "/var/run/docker.sock:/var/run/docker.sock",
+      "./config/portainer:/data"
+    ],
+    "ports": [
+      "9000:9000"
+    ],
+    "restart": "unless-stopped"
   }
+},
+{
+  "containerName": "nginx-proxy-manager",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/nginx-proxy-manager.png",
+  "category": "Core",
+  "port": "81",
+  "helpLink": "https://nginxproxymanager.com/guide/",
+  "imageName": "jc21/nginx-proxy-manager:latest",
+  "excerpt": "Easily manage reverse proxies, SSL certificates, and domain names.",
+  "description": "Nginx Proxy Manager provides a simple web interface for managing Nginx reverse proxies and SSL certificates. It makes it easy to securely expose self-hosted applications using custom domain names and automatic Let's Encrypt certificates.",
+  "service": {
+    "image": "jc21/nginx-proxy-manager:latest",
+    "container_name": "nginx-proxy-manager",
+    "environment": [
+      "DB_MYSQL_HOST=mariadb",
+      "DB_MYSQL_PORT=3306",
+      "DB_MYSQL_USER=npm",
+      "DB_MYSQL_PASSWORD=changeme",
+      "DB_MYSQL_NAME=npm",
+      "DISABLE_IPV6=true"
+    ],
+    "volumes": [
+      "./config/nginx-proxy-manager:/data",
+      "./config/nginx-proxy-manager/letsencrypt:/etc/letsencrypt"
+    ],
+    "ports": [
+      "80:80",
+      "81:81",
+      "443:443"
+    ],
+    "restart": "unless-stopped"
+  }
+},
+{
+  "containerName": "watchtower",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/watchtower.png",
+  "category": "Core",
+  "port": "",
+  "helpLink": "https://containrrr.dev/watchtower/",
+  "imageName": "containrrr/watchtower:latest",
+  "excerpt": "Automatically update your running Docker containers.",
+  "description": "Watchtower monitors your running Docker containers and automatically updates them when new images are available. It can help keep a homelab up to date without manually pulling new images and recreating containers.",
+  "service": {
+    "image": "containrrr/watchtower:latest",
+    "container_name": "watchtower",
+    "volumes": [
+      "/var/run/docker.sock:/var/run/docker.sock"
+    ],
+    "restart": "unless-stopped"
+  }
+},
+{
+  "containerName": "uptime-kuma",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/uptime-kuma.png",
+  "category": "Core",
+  "port": "3001",
+  "helpLink": "https://github.com/louislam/uptime-kuma/wiki",
+  "imageName": "louislam/uptime-kuma:latest",
+  "excerpt": "Monitor the uptime and availability of your services.",
+  "description": "Uptime Kuma is a self-hosted monitoring tool that lets you monitor websites, servers, Docker containers, and other services. It supports HTTP, TCP, Ping, DNS, and other monitoring methods with notifications for downtime.",
+  "service": {
+    "image": "louislam/uptime-kuma:latest",
+    "container_name": "uptime-kuma",
+    "volumes": [
+      "./config/uptime-kuma:/app/data"
+    ],
+    "ports": [
+      "3001:3001"
+    ],
+    "restart": "unless-stopped"
+  }
+},
+{
+  "containerName": "glances",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/glances.png",
+  "category": "Core",
+  "port": "61208",
+  "helpLink": "https://glances.readthedocs.io/",
+  "imageName": "nicolargo/glances:latest",
+  "excerpt": "Monitor your server's CPU, memory, disk, network, and system resources.",
+  "description": "Glances is a cross-platform system monitoring tool that provides an overview of CPU, memory, disk, network, processes, and other system resources through a web interface.",
+  "service": {
+    "image": "nicolargo/glances:latest",
+    "container_name": "glances",
+    "environment": [
+      "GLANCES_OPT=-w"
+    ],
+    "volumes": [
+      "/var/run/docker.sock:/var/run/docker.sock:ro",
+      "/:/host:ro"
+    ],
+    "ports": [
+      "61208:61208"
+    ],
+    "pid": "host",
+    "restart": "unless-stopped"
+  }
+},
+{
+  "containerName": "dozzle",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/dozzle.png",
+  "category": "Core",
+  "port": "8080",
+  "helpLink": "https://dozzle.dev/guide/what-is-dozzle",
+  "imageName": "amir20/dozzle:latest",
+  "excerpt": "View and monitor Docker container logs in real time.",
+  "description": "Dozzle is a lightweight web-based Docker container log viewer. It provides a simple interface for viewing and following logs from running containers in real time without needing to use the command line.",
+  "service": {
+    "image": "amir20/dozzle:latest",
+    "container_name": "dozzle",
+    "volumes": [
+      "/var/run/docker.sock:/var/run/docker.sock:ro"
+    ],
+    "ports": [
+      "8080:8080"
+    ],
+    "restart": "unless-stopped"
+  }
+},
+{
+  "containerName": "homepage",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/homepage.png",
+  "category": "Core",
+  "port": "3000",
+  "helpLink": "https://gethomepage.dev/",
+  "imageName": "ghcr.io/gethomepage/homepage:latest",
+  "excerpt": "Create a customizable dashboard for your homelab services.",
+  "description": "Homepage is a highly customizable self-hosted dashboard for organizing and accessing your homelab services. It can display service status, system information, bookmarks, and integrations from a single web interface.",
+  "service": {
+    "image": "ghcr.io/gethomepage/homepage:latest",
+    "container_name": "homepage",
+    "volumes": [
+      "./config/homepage:/app/config"
+    ],
+    "ports": [
+      "3000:3000"
+    ],
+    "restart": "unless-stopped"
+  }
+},
+{
+  "containerName": "dashy",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/dashy.png",
+  "category": "Core",
+  "port": "8080",
+  "helpLink": "https://dashy.to/docs/",
+  "imageName": "lissy93/dashy:latest",
+  "excerpt": "Build a customizable dashboard for all your self-hosted services.",
+  "description": "Dashy is a self-hosted dashboard that provides a customizable interface for organizing links and applications across your homelab. It supports icons, status checks, authentication, themes, and numerous integrations.",
+  "service": {
+    "image": "lissy93/dashy:latest",
+    "container_name": "dashy",
+    "ports": [
+      "8080:80"
+    ],
+    "restart": "unless-stopped"
+  }
+},
+{
+  "containerName": "pihole",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/pi-hole.png",
+  "category": "Core",
+  "port": "80",
+  "helpLink": "https://docs.pi-hole.net/",
+  "imageName": "pihole/pihole:latest",
+  "excerpt": "Block ads and trackers across your entire network with DNS.",
+  "description": "Pi-hole is a network-wide DNS sinkhole that blocks advertisements, trackers, and other unwanted domains for devices connected to your network. It also provides a web interface for viewing DNS activity and managing blocklists.",
+  "service": {
+    "image": "pihole/pihole:latest",
+    "container_name": "pihole",
+    "environment": [
+      "TZ=America/New_York",
+      "WEBPASSWORD=changeme"
+    ],
+    "volumes": [
+      "./config/pihole:/etc/pihole",
+      "./config/dnsmasq:/etc/dnsmasq.d"
+    ],
+    "ports": [
+      "53:53/tcp",
+      "53:53/udp",
+      "80:80/tcp"
+    ],
+    "restart": "unless-stopped"
+  }
+},
+{
+  "containerName": "adguardhome",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/adguard-home.png",
+  "category": "Core",
+  "port": "3000",
+  "helpLink": "https://adguard-dns.io/kb/",
+  "imageName": "adguard/adguardhome:latest",
+  "excerpt": "Block ads and trackers with a network-wide DNS server.",
+  "description": "AdGuard Home is a network-wide DNS server that blocks advertisements, trackers, and malicious domains. It provides detailed DNS statistics, filtering controls, and a web interface for managing your network's DNS traffic.",
+  "service": {
+    "image": "adguard/adguardhome:latest",
+    "container_name": "adguardhome",
+    "volumes": [
+      "./config/adguardhome/work:/opt/adguardhome/work",
+      "./config/adguardhome/conf:/opt/adguardhome/conf"
+    ],
+    "ports": [
+      "53:53/tcp",
+      "53:53/udp",
+      "3000:3000/tcp"
+    ],
+    "restart": "unless-stopped"
+  }
+}
 ]
