@@ -546,5 +546,425 @@
       ],
       "restart": "unless-stopped"
     }
+  },
+  {
+    "containerName": "tailscale",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/tailscale.png",
+    "category": "Networking",
+    "port": "",
+    "helpLink": "https://tailscale.com/kb/",
+    "imageName": "tailscale/tailscale:latest",
+    "excerpt": "Securely connect to your homelab from anywhere with a private mesh VPN.",
+    "description": "Tailscale creates a secure private network between your devices using WireGuard. It makes it easy to remotely access servers, services, and other devices without exposing them directly to the public internet or configuring traditional port forwarding.",
+    "service": {
+      "image": "tailscale/tailscale:latest",
+      "container_name": "tailscale",
+      "environment": [
+        "TS_STATE_DIR=/var/lib/tailscale",
+        "TS_USERSPACE=false"
+      ],
+      "volumes": [
+        "./config/tailscale:/var/lib/tailscale"
+      ],
+      "cap_add": [
+        "NET_ADMIN",
+        "SYS_MODULE"
+      ],
+      "devices": [
+        "/dev/net/tun:/dev/net/tun"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "wireguard",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/wireguard.png",
+    "category": "Networking",
+    "port": "51820",
+    "helpLink": "https://www.wireguard.com/quickstart/",
+    "imageName": "lscr.io/linuxserver/wireguard:latest",
+    "excerpt": "Create a fast and secure VPN for remote access to your network.",
+    "description": "WireGuard is a modern, lightweight VPN protocol that provides secure encrypted connections between devices. It can be used to remotely access your homelab, securely connect networks, or route internet traffic through your home server.",
+    "service": {
+      "image": "lscr.io/linuxserver/wireguard:latest",
+      "container_name": "wireguard",
+      "environment": [
+        "PUID=1000",
+        "PGID=1000",
+        "TZ=America/New_York",
+        "SERVERURL=auto",
+        "SERVERPORT=51820",
+        "PEERS=1",
+        "PEERDNS=auto"
+      ],
+      "volumes": [
+        "./config/wireguard:/config",
+        "/lib/modules:/lib/modules:ro"
+      ],
+      "ports": [
+        "51820:51820/udp"
+      ],
+      "cap_add": [
+        "NET_ADMIN",
+        "SYS_MODULE"
+      ],
+      "sysctls": [
+        "net.ipv4.conf.all.src_valid_mark=1"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "cloudflared",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/cloudflare-zero-trust.png",
+    "category": "Networking",
+    "port": "",
+    "helpLink": "https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/",
+    "imageName": "cloudflare/cloudflared:latest",
+    "excerpt": "Securely expose services to the internet without opening inbound ports.",
+    "description": "Cloudflare Tunnel creates an encrypted connection between your homelab and Cloudflare, allowing you to securely publish web applications without directly exposing your server or opening inbound firewall ports.",
+    "service": {
+      "image": "cloudflare/cloudflared:latest",
+      "container_name": "cloudflared",
+      "command": "tunnel --no-autoupdate run",
+      "environment": [
+        "TUNNEL_TOKEN=changeme"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "authentik",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/authentik.png",
+    "category": "Security",
+    "port": "9000",
+    "helpLink": "https://docs.goauthentik.io/",
+    "imageName": "ghcr.io/goauthentik/server:latest",
+    "excerpt": "Add single sign-on and centralized authentication to your homelab.",
+    "description": "Authentik is an open-source identity provider and authentication platform. It provides single sign-on, multi-factor authentication, user management, and access control for self-hosted applications.",
+    "service": {
+      "image": "ghcr.io/goauthentik/server:latest",
+      "container_name": "authentik",
+      "environment": [
+        "AUTHENTIK_SECRET_KEY=changeme"
+      ],
+      "volumes": [
+        "./config/authentik:/data"
+      ],
+      "ports": [
+        "9000:9000"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "authelia",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/authelia.png",
+    "category": "Security",
+    "port": "9091",
+    "helpLink": "https://www.authelia.com/",
+    "imageName": "authelia/authelia:latest",
+    "excerpt": "Protect your self-hosted applications with two-factor authentication.",
+    "description": "Authelia is an open-source authentication and authorization server that works as a companion to reverse proxies. It can protect applications with single sign-on, two-factor authentication, access policies, and session management.",
+    "service": {
+      "image": "authelia/authelia:latest",
+      "container_name": "authelia",
+      "volumes": [
+        "./config/authelia:/config"
+      ],
+      "ports": [
+        "9091:9091"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "crowdsec",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/crowdsec.png",
+    "category": "Security",
+    "port": "8080",
+    "helpLink": "https://docs.crowdsec.net/",
+    "imageName": "crowdsecurity/crowdsec:latest",
+    "excerpt": "Detect and block malicious activity targeting your services.",
+    "description": "CrowdSec is an open-source security engine that analyzes logs and network activity to detect malicious behavior. It can identify attacks such as brute-force attempts and abusive traffic and share threat intelligence with other CrowdSec users.",
+    "service": {
+      "image": "crowdsecurity/crowdsec:latest",
+      "container_name": "crowdsec",
+      "environment": [
+        "TZ=America/New_York"
+      ],
+      "volumes": [
+        "./config/crowdsec:/etc/crowdsec",
+        "./data/crowdsec:/var/lib/crowdsec/data"
+      ],
+      "ports": [
+        "8080:8080"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "openvpn",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/openvpn.png",
+    "category": "Networking",
+    "port": "1194",
+    "helpLink": "https://openvpn.net/community-resources/",
+    "imageName": "kylemanna/openvpn:latest",
+    "excerpt": "Run your own traditional OpenVPN server for remote network access.",
+    "description": "OpenVPN is a widely supported VPN solution that allows remote devices to securely connect to your private network. It can provide encrypted access to homelab services and internal network resources from outside your home.",
+    "service": {
+      "image": "kylemanna/openvpn:latest",
+      "container_name": "openvpn",
+      "volumes": [
+        "./config/openvpn:/etc/openvpn"
+      ],
+      "ports": [
+        "1194:1194/udp"
+      ],
+      "cap_add": [
+        "NET_ADMIN"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "ollama",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/ollama.png",
+    "category": "AI",
+    "port": "11434",
+    "helpLink": "https://docs.ollama.com/",
+    "imageName": "ollama/ollama:latest",
+    "excerpt": "Run large language models locally on your own hardware.",
+    "description": "Ollama makes it easy to download and run large language models locally. It provides a simple API for interacting with models and can run models such as Llama, Mistral, Gemma, and other open-source AI models directly on your homelab hardware.",
+    "service": {
+      "image": "ollama/ollama:latest",
+      "container_name": "ollama",
+      "volumes": [
+        "./data/ollama:/root/.ollama"
+      ],
+      "ports": [
+        "11434:11434"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "open-webui",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/open-webui.png",
+    "category": "AI",
+    "port": "8080",
+    "helpLink": "https://docs.openwebui.com/",
+    "imageName": "ghcr.io/open-webui/open-webui:main",
+    "excerpt": "Use your local AI models through a ChatGPT-style web interface.",
+    "description": "Open WebUI is a self-hosted web interface for interacting with local and remote AI models. It provides a ChatGPT-style experience with conversations, model management, file uploads, document processing, and support for services such as Ollama.",
+    "service": {
+      "image": "ghcr.io/open-webui/open-webui:main",
+      "container_name": "open-webui",
+      "environment": [
+        "OLLAMA_BASE_URL=http://ollama:11434"
+      ],
+      "volumes": [
+        "./data/open-webui:/app/backend/data"
+      ],
+      "ports": [
+        "8080:8080"
+      ],
+      "depends_on": [
+        "ollama"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "comfyui",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/comfyui.png",
+    "category": "AI",
+    "port": "8188",
+    "helpLink": "https://docs.comfy.org/",
+    "imageName": "ghcr.io/comfyanonymous/comfyui:latest",
+    "excerpt": "Create AI-generated images and workflows with a powerful node-based interface.",
+    "description": "ComfyUI is a node-based interface for running generative AI workflows. It is commonly used for image generation, image-to-image workflows, video generation, and other AI-powered media tasks using models such as Stable Diffusion and Flux.",
+    "service": {
+      "image": "ghcr.io/comfyanonymous/comfyui:latest",
+      "container_name": "comfyui",
+      "volumes": [
+        "./data/comfyui:/home/runner/ComfyUI"
+      ],
+      "ports": [
+        "8188:8188"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "localai",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/localai.png",
+    "category": "AI",
+    "port": "8080",
+    "helpLink": "https://localai.io/docs/",
+    "imageName": "localai/localai:latest",
+    "excerpt": "Run an OpenAI-compatible AI API locally on your homelab.",
+    "description": "LocalAI is a self-hosted AI inference platform that provides an OpenAI-compatible API for running language models, image generation, speech-to-text, text-to-speech, and other AI workloads locally without relying on external cloud services.",
+    "service": {
+      "image": "localai/localai:latest",
+      "container_name": "localai",
+      "volumes": [
+        "./data/localai:/build/models"
+      ],
+      "ports": [
+        "8080:8080"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "whisper",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/whisper.png",
+    "category": "AI",
+    "port": "9000",
+    "helpLink": "https://github.com/openai/whisper",
+    "imageName": "onerahmet/openai-whisper-asr-webservice:latest",
+    "excerpt": "Convert speech and audio into text using OpenAI Whisper.",
+    "description": "Whisper is an open-source automatic speech recognition model that converts spoken audio into text. It can be used for transcription, subtitles, voice notes, meeting recordings, and other speech-to-text workloads.",
+    "service": {
+      "image": "onerahmet/openai-whisper-asr-webservice:latest",
+      "container_name": "whisper",
+      "environment": [
+        "ASR_MODEL=base",
+        "ASR_ENGINE=openai_whisper"
+      ],
+      "ports": [
+        "9000:9000"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "gitea",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/gitea.png",
+    "category": "Development",
+    "port": "3000",
+    "helpLink": "https://docs.gitea.com/",
+    "imageName": "docker.gitea.com/gitea:latest",
+    "excerpt": "Host your own lightweight Git repositories and development platform.",
+    "description": "Gitea is a lightweight self-hosted Git service for managing repositories, issues, pull requests, releases, users, and collaboration. It provides a simple alternative to hosted Git platforms while keeping your source code on your own server.",
+    "service": {
+      "image": "docker.gitea.com/gitea:latest",
+      "container_name": "gitea",
+      "environment": [
+        "USER_UID=1000",
+        "USER_GID=1000",
+        "GITEA__database__DB_TYPE=sqlite3"
+      ],
+      "volumes": [
+        "./data/gitea:/data"
+      ],
+      "ports": [
+        "3000:3000",
+        "2222:22"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "gitlab",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/gitlab.png",
+    "category": "Development",
+    "port": "8929",
+    "helpLink": "https://docs.gitlab.com/",
+    "imageName": "gitlab/gitlab-ce:latest",
+    "excerpt": "Run your own complete DevOps platform for source code and CI/CD.",
+    "description": "GitLab Community Edition is a self-hosted DevOps platform that combines Git repositories, issue tracking, merge requests, CI/CD pipelines, container registries, security tools, and project management in one application.",
+    "service": {
+      "image": "gitlab/gitlab-ce:latest",
+      "container_name": "gitlab",
+      "hostname": "gitlab.local",
+      "environment": [
+        "GITLAB_OMNIBUS_CONFIG=external_url 'http://gitlab.local'"
+      ],
+      "volumes": [
+        "./config/gitlab:/etc/gitlab",
+        "./logs/gitlab:/var/log/gitlab",
+        "./data/gitlab:/var/opt/gitlab"
+      ],
+      "ports": [
+        "8929:8929",
+        "2224:22"
+      ],
+      "shm_size": "256m",
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "code-server",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/code-server.png",
+    "category": "Development",
+    "port": "8443",
+    "helpLink": "https://coder.com/docs/code-server",
+    "imageName": "lscr.io/linuxserver/code-server:latest",
+    "excerpt": "Run VS Code in your browser and develop directly on your server.",
+    "description": "Code Server provides a browser-based version of Visual Studio Code that runs on your homelab. It allows you to write, edit, and run code remotely without installing a full development environment on your local computer.",
+    "service": {
+      "image": "lscr.io/linuxserver/code-server:latest",
+      "container_name": "code-server",
+      "environment": [
+        "PUID=1000",
+        "PGID=1000",
+        "TZ=America/New_York",
+        "PASSWORD=changeme",
+        "SUDO_PASSWORD=changeme"
+      ],
+      "volumes": [
+        "./config/code-server:/config",
+        "./projects:/config/workspace"
+      ],
+      "ports": [
+        "8443:8443"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "jenkins",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/jenkins.png",
+    "category": "Development",
+    "port": "8080",
+    "helpLink": "https://www.jenkins.io/doc/",
+    "imageName": "jenkins/jenkins:lts",
+    "excerpt": "Automate builds, tests, deployments, and other development tasks.",
+    "description": "Jenkins is an open-source automation server used to build, test, and deploy software. It can automatically run development workflows whenever code changes are pushed to a repository.",
+    "service": {
+      "image": "jenkins/jenkins:lts",
+      "container_name": "jenkins",
+      "volumes": [
+        "./data/jenkins:/var/jenkins_home"
+      ],
+      "ports": [
+        "8080:8080",
+        "50000:50000"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "registry",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/docker.png",
+    "category": "Development",
+    "port": "5000",
+    "helpLink": "https://distribution.github.io/distribution/",
+    "imageName": "registry:3",
+    "excerpt": "Store and distribute your own private Docker container images.",
+    "description": "Docker Registry is a private container image registry that lets you store, manage, and distribute Docker images from your own server. It is useful for homelabs and development environments that build and deploy their own container images.",
+    "service": {
+      "image": "registry:3",
+      "container_name": "registry",
+      "volumes": [
+        "./data/registry:/var/lib/registry"
+      ],
+      "ports": [
+        "5000:5000"
+      ],
+      "restart": "unless-stopped"
+    }
   }
 ]
