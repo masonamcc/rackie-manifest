@@ -8,7 +8,7 @@ Rackie is a self-hosted server management platform that makes it easy to deploy,
 ## What's New
 
 ### Bug Fixes
-- Fixed bug where the docker-compose.yml file in the app directory was not being written to correctly.
+- Fixed bug where the docker-compose.yml file in the app directory was not being written to correctly and apps didn't have permissions to use volumes
 
 ## Join the Community
 Hey everyone, it's Mason, the creator or Rackie. I made a discord server that you can join and ask questions in the community! Here's the link: https://discord.gg/2GPDvEE4w
