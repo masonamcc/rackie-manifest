@@ -3,6 +3,8 @@
   "description" : "",
   "docker": {
     "frontendVersion":"2.1.6",
-    "backendVersion":"1.0.0"
+    "backendVersion":"1.0.0",
+    "frontendNpeVersion":"2.1.6",
+    "backendNpeVersion":"2.1.6"
   }
 }
