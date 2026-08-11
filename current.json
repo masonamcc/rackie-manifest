@@ -1,8 +1,10 @@
 {
-  "name" : "Rackie",
-  "description" : "",
+  "name": "Rackie",
+  "description": "",
   "docker": {
-    "frontendVersion":"2.1.4",
-    "backendVersion":"1.0.0"
+    "frontendVersion": "2.1.6",
+    "backendVersion": "1.0.0",
+    "frontendNpeVersion": "2.1.7",
+    "backendNpeVersion": "2.1.6"
   }
 }
