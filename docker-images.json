@@ -212,14 +212,6 @@
     "service": {
       "image": "jc21/nginx-proxy-manager:latest",
       "container_name": "nginx-proxy-manager",
-      "environment": [
-        "DB_MYSQL_HOST=mariadb",
-        "DB_MYSQL_PORT=3306",
-        "DB_MYSQL_USER=npm",
-        "DB_MYSQL_PASSWORD=changeme",
-        "DB_MYSQL_NAME=npm",
-        "DISABLE_IPV6=true"
-      ],
       "volumes": [
         "./config/nginx-proxy-manager:/data",
         "./config/nginx-proxy-manager/letsencrypt:/etc/letsencrypt"
