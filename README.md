@@ -1,6 +1,6 @@
 # Rackie™
 
-`v2.1.6`
+`v2.1.7`
 
 ### Brief
 Rackie is a self-hosted server management platform that makes it easy to deploy, manage, and monitor applications on your own hardware. It provides a simple web interface for installing popular services, managing Docker containers, and accessing your applications without requiring extensive Linux or Docker knowledge.
