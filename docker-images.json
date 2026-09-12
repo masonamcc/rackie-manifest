@@ -958,5 +958,31 @@
       ],
       "restart": "unless-stopped"
     }
+  },
+  {
+  "containerName": "postgres",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/postgresql.png",
+  "category": "Database",
+  "port": "5432",
+  "helpLink": "https://www.postgresql.org/",
+  "imageName": "postgres:16",
+  "excerpt": "PostgreSQL relational database.",
+  "description": "PostgreSQL is an open-source relational database that can be used by self-hosted applications.",
+  "service": {
+    "image": "postgres:16",
+    "container_name": "postgres",
+    "environment": [
+      "POSTGRES_USER=postgres",
+      "POSTGRES_PASSWORD=CHANGE_THIS_PASSWORD",
+      "POSTGRES_DB=postgres"
+    ],
+    "volumes": [
+      "./config/postgres:/var/lib/postgresql/data"
+    ],
+    "ports": [
+      "5432:5432"
+    ],
+    "restart": "unless-stopped"
   }
+}
 ]
