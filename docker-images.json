@@ -957,8 +957,7 @@
       "5432:5432"
     ],
     "restart": "unless-stopped"
-  }
-},
+  },
   {
   "containerName": "radarr",
   "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/radarr.png",
