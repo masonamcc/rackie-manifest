@@ -934,84 +934,85 @@
     }
   },
   {
-  "containerName": "postgres",
-  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/postgresql.png",
-  "category": "Database",
-  "port": "5432",
-  "helpLink": "https://www.postgresql.org/",
-  "imageName": "postgres:16",
-  "excerpt": "PostgreSQL relational database.",
-  "description": "PostgreSQL is an open-source relational database that can be used by self-hosted applications.",
-  "service": {
-    "image": "postgres:16",
-    "container_name": "postgres",
-    "environment": [
-      "POSTGRES_USER=postgres",
-      "POSTGRES_PASSWORD=CHANGE_THIS_PASSWORD",
-      "POSTGRES_DB=postgres"
-    ],
-    "volumes": [
-      "./config/postgres:/var/lib/postgresql/data"
-    ],
-    "ports": [
-      "5432:5432"
-    ],
-    "restart": "unless-stopped"
+    "containerName": "postgres",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/postgresql.png",
+    "category": "Database",
+    "port": "5432",
+    "helpLink": "https://www.postgresql.org/",
+    "imageName": "postgres:16",
+    "excerpt": "PostgreSQL relational database.",
+    "description": "PostgreSQL is an open-source relational database that can be used by self-hosted applications.",
+    "service": {
+      "image": "postgres:16",
+      "container_name": "postgres",
+      "environment": [
+        "POSTGRES_USER=postgres",
+        "POSTGRES_PASSWORD=CHANGE_THIS_PASSWORD",
+        "POSTGRES_DB=postgres"
+      ],
+      "volumes": [
+        "./config/postgres:/var/lib/postgresql/data"
+      ],
+      "ports": [
+        "5432:5432"
+      ],
+      "restart": "unless-stopped"
+    }
   },
   {
-  "containerName": "radarr",
-  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/radarr.png",
-  "category": "Media",
-  "port": "7878",
-  "helpLink": "https://radarr.video/",
-  "imageName": "lscr.io/linuxserver/radarr:latest",
-  "excerpt": "Radarr movie collection manager.",
-  "description": "Radarr is an open-source movie collection manager that automatically searches for, downloads, renames, and organizes movies.",
-  "service": {
-    "image": "lscr.io/linuxserver/radarr:latest",
-    "container_name": "radarr",
-    "environment": [
-      "PUID=1000",
-      "PGID=1000",
-      "TZ=America/New_York"
-    ],
-    "volumes": [
-      "./config/radarr:/config",
-      "./media/movies:/movies",
-      "./downloads:/downloads"
-    ],
-    "ports": [
-      "7878:7878"
-    ],
-    "restart": "unless-stopped"
+    "containerName": "radarr",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/radarr.png",
+    "category": "Media",
+    "port": "7878",
+    "helpLink": "https://radarr.video/",
+    "imageName": "lscr.io/linuxserver/radarr:latest",
+    "excerpt": "Radarr movie collection manager.",
+    "description": "Radarr is an open-source movie collection manager that automatically searches for, downloads, renames, and organizes movies.",
+    "service": {
+      "image": "lscr.io/linuxserver/radarr:latest",
+      "container_name": "radarr",
+      "environment": [
+        "PUID=1000",
+        "PGID=1000",
+        "TZ=America/New_York"
+      ],
+      "volumes": [
+        "./config/radarr:/config",
+        "./media/movies:/movies",
+        "./downloads:/downloads"
+      ],
+      "ports": [
+        "7878:7878"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  {
+    "containerName": "sonarr",
+    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/sonarr.png",
+    "category": "Media",
+    "port": "8989",
+    "helpLink": "https://sonarr.tv/",
+    "imageName": "lscr.io/linuxserver/sonarr:latest",
+    "excerpt": "Sonarr TV series collection manager.",
+    "description": "Sonarr is an open-source TV series collection manager that automatically searches for, downloads, renames, and organizes TV episodes.",
+    "service": {
+      "image": "lscr.io/linuxserver/sonarr:latest",
+      "container_name": "sonarr",
+      "environment": [
+        "PUID=1000",
+        "PGID=1000",
+        "TZ=America/New_York"
+      ],
+      "volumes": [
+        "./config/sonarr:/config",
+        "./media/tv:/tv",
+        "./downloads:/downloads"
+      ],
+      "ports": [
+        "8989:8989"
+      ],
+      "restart": "unless-stopped"
+    }
   }
-},
-{
-  "containerName": "sonarr",
-  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/sonarr.png",
-  "category": "Media",
-  "port": "8989",
-  "helpLink": "https://sonarr.tv/",
-  "imageName": "lscr.io/linuxserver/sonarr:latest",
-  "excerpt": "Sonarr TV series collection manager.",
-  "description": "Sonarr is an open-source TV series collection manager that automatically searches for, downloads, renames, and organizes TV episodes.",
-  "service": {
-    "image": "lscr.io/linuxserver/sonarr:latest",
-    "container_name": "sonarr",
-    "environment": [
-      "PUID=1000",
-      "PGID=1000",
-      "TZ=America/New_York"
-    ],
-    "volumes": [
-      "./config/sonarr:/config",
-      "./media/tv:/tv",
-      "./downloads:/downloads"
-    ],
-    "ports": [
-      "8989:8989"
-    ],
-    "restart": "unless-stopped"
-  }
-}
 ]
