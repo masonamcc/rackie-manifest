@@ -965,9 +965,26 @@
   "port": "7878",
   "helpLink": "https://radarr.video/",
   "imageName": "lscr.io/linuxserver/radarr:latest",
-  "excerpt": "Automatically manage and organize your movie library.",
-  "description": "Radarr is a movie collection manager that monitors your library and automatically searches for, downloads, renames, and organizes movies.",
-  "service": "radarr:\n image: lscr.io/linuxserver/radarr:latest\n container_name: radarr\n environment:\n - PUID=1000\n - PGID=1000\n - TZ=America/New_York\n volumes:\n - ./config/radarr:/config\n - ./media/movies:/movies\n - ./downloads:/downloads\n ports:\n - \"7878:7878\"\n restart: unless-stopped"
+  "excerpt": "Radarr movie collection manager.",
+  "description": "Radarr is an open-source movie collection manager that automatically searches for, downloads, renames, and organizes movies.",
+  "service": {
+    "image": "lscr.io/linuxserver/radarr:latest",
+    "container_name": "radarr",
+    "environment": [
+      "PUID=1000",
+      "PGID=1000",
+      "TZ=America/New_York"
+    ],
+    "volumes": [
+      "./config/radarr:/config",
+      "./media/movies:/movies",
+      "./downloads:/downloads"
+    ],
+    "ports": [
+      "7878:7878"
+    ],
+    "restart": "unless-stopped"
+  }
 },
 {
   "containerName": "sonarr",
@@ -976,8 +993,25 @@
   "port": "8989",
   "helpLink": "https://sonarr.tv/",
   "imageName": "lscr.io/linuxserver/sonarr:latest",
-  "excerpt": "Automatically manage and organize your TV library.",
-  "description": "Sonarr is a TV series collection manager that monitors your library and automatically searches for, downloads, renames, and organizes episodes.",
-  "service": "sonarr:\n image: lscr.io/linuxserver/sonarr:latest\n container_name: sonarr\n environment:\n - PUID=1000\n - PGID=1000\n - TZ=America/New_York\n volumes:\n - ./config/sonarr:/config\n - ./media/tv:/tv\n - ./downloads:/downloads\n ports:\n - \"8989:8989\"\n restart: unless-stopped"
+  "excerpt": "Sonarr TV series collection manager.",
+  "description": "Sonarr is an open-source TV series collection manager that automatically searches for, downloads, renames, and organizes TV episodes.",
+  "service": {
+    "image": "lscr.io/linuxserver/sonarr:latest",
+    "container_name": "sonarr",
+    "environment": [
+      "PUID=1000",
+      "PGID=1000",
+      "TZ=America/New_York"
+    ],
+    "volumes": [
+      "./config/sonarr:/config",
+      "./media/tv:/tv",
+      "./downloads:/downloads"
+    ],
+    "ports": [
+      "8989:8989"
+    ],
+    "restart": "unless-stopped"
+  }
 }
 ]
