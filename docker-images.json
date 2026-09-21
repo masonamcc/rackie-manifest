@@ -264,32 +264,6 @@
     }
   },
   {
-    "containerName": "glances",
-    "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/glances.png",
-    "category": "Core",
-    "port": "61208",
-    "helpLink": "https://glances.readthedocs.io/",
-    "imageName": "nicolargo/glances:latest",
-    "excerpt": "Monitor your server's CPU, memory, disk, network, and system resources.",
-    "description": "Glances is a cross-platform system monitoring tool that provides an overview of CPU, memory, disk, network, processes, and other system resources through a web interface.",
-    "service": {
-      "image": "nicolargo/glances:latest",
-      "container_name": "glances",
-      "environment": [
-        "GLANCES_OPT=-w"
-      ],
-      "volumes": [
-        "/var/run/docker.sock:/var/run/docker.sock:ro",
-        "/:/host:ro"
-      ],
-      "ports": [
-        "61208:61208"
-      ],
-      "pid": "host",
-      "restart": "unless-stopped"
-    }
-  },
-  {
     "containerName": "dozzle",
     "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/dozzle.png",
     "category": "Core",
