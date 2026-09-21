@@ -984,5 +984,27 @@
     ],
     "restart": "unless-stopped"
   }
+},
+  {
+  "containerName": "radarr",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/radarr.png",
+  "category": "Media",
+  "port": "7878",
+  "helpLink": "https://radarr.video/",
+  "imageName": "lscr.io/linuxserver/radarr:latest",
+  "excerpt": "Automatically manage and organize your movie library.",
+  "description": "Radarr is a movie collection manager that monitors your library and automatically searches for, downloads, renames, and organizes movies.",
+  "service": "radarr:\n image: lscr.io/linuxserver/radarr:latest\n container_name: radarr\n environment:\n - PUID=1000\n - PGID=1000\n - TZ=America/New_York\n volumes:\n - ./config/radarr:/config\n - ./media/movies:/movies\n - ./downloads:/downloads\n ports:\n - \"7878:7878\"\n restart: unless-stopped"
+},
+{
+  "containerName": "sonarr",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/sonarr.png",
+  "category": "Media",
+  "port": "8989",
+  "helpLink": "https://sonarr.tv/",
+  "imageName": "lscr.io/linuxserver/sonarr:latest",
+  "excerpt": "Automatically manage and organize your TV library.",
+  "description": "Sonarr is a TV series collection manager that monitors your library and automatically searches for, downloads, renames, and organizes episodes.",
+  "service": "sonarr:\n image: lscr.io/linuxserver/sonarr:latest\n container_name: sonarr\n environment:\n - PUID=1000\n - PGID=1000\n - TZ=America/New_York\n volumes:\n - ./config/sonarr:/config\n - ./media/tv:/tv\n - ./downloads:/downloads\n ports:\n - \"8989:8989\"\n restart: unless-stopped"
 }
 ]
